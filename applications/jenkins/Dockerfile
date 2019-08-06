@@ -12,10 +12,11 @@ add-apt-repository  "deb [arch=amd64] https://download.docker.com/linux/debian  
 apt-get update && apt-get install docker-ce -y
 
 #Installing kubectl from Docker
-RUN curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -;\
+RUN apt-get update && apt-get install ca-certificates
+RUN curl -fsSL https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -;\
 touch /etc/apt/sources.list.d/kubernetes.list;\
-echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list;\
-apt-get update && apt-get install -y kubectl
+echo "deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main" | tee -a /etc/apt/sources.list.d/kubernetes.list;\
+apt-get install -y apt-transport-https && apt-get update && apt-get install -y kubectl
 
 # Grant jenkins user group access to /var/run/docker.sock
 RUN addgroup --gid 1001 dsock

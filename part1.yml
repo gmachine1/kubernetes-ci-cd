@@ -5,7 +5,7 @@ parts:
     steps:
 
       - cap: Start up the Kubernetes cluster with Minikube, giving it some extra resources.
-        com: minikube start --memory 8000 --cpus 2 --kubernetes-version v1.11.0
+        com: minikube start --registry-mirror=https://registry.docker-cn.com --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
 
       - cap: Enable the Minikube add-ons Heapster and Ingress.
         com: minikube addons enable heapster; minikube addons enable ingress
